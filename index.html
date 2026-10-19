@@ -94,6 +94,8 @@
         box-shadow: var(--shadow);
         padding: 22px 20px;
         margin-bottom: 20px;
+        min-width: 0;
+        max-width: 100%;
       }
       .card h2 {
         font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
@@ -127,6 +129,8 @@
         border-radius: 12px;
         background: var(--surface);
         overflow: hidden;
+        min-width: 0;
+        max-width: 100%;
       }
       .input-row:focus-within { border-color: var(--accent); }
       .input-row .prefix,
@@ -144,6 +148,7 @@
       .input-row input {
         flex: 1 1 auto;
         min-width: 0;
+        max-width: 100%;
         border: 0;
         outline: 0;
         background: transparent;
@@ -155,7 +160,13 @@
         min-height: 52px;
       }
       input[type="date"] {
+        display: block;
         width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        appearance: none;
         border: 1.5px solid var(--line);
         border-radius: 12px;
         background: var(--surface);
@@ -167,6 +178,17 @@
         min-height: 52px;
       }
       input[type="date"]:focus { border-color: var(--accent); outline: 0; }
+      /* iOS Safari gives the date value its own intrinsic minimum width,
+         which can push the field wider than its card. Let it shrink. */
+      input[type="date"]::-webkit-date-and-time-value {
+        min-width: 0;
+        margin: 0;
+        text-align: left;
+      }
+      input[type="date"]::-webkit-calendar-picker-indicator {
+        margin-left: 4px;
+        padding: 0;
+      }
 
       .two-up {
         display: grid;
